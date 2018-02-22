@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <UserSecretsId>aspnet-ContactList-F8216185-58AF-4885-8EB2-059EB62C2DD4</UserSecretsId>
+    <UserSecretsId>aspnet-ContactList-99F26F4B-5113-42F2-A768-A2789C34859B</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <None Update="app.db" CopyToOutputDirectory="PreserveNewest" />
