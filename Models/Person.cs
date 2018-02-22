@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace ContactList.Models
 {
@@ -11,22 +9,23 @@ namespace ContactList.Models
         public Guid Id { get; set; }
 
         public ApplicationUser User { get; set; }
-        
-        [Required] 
+
+        [Required]
         public string UserId { get; set; }
 
         [Required]
-        public string FullName { get; set; }
+        public string NickName { get; set; }
 
         [Required]
-        public string NickName { get; set; }
+        public string FullName { get; set; }
 
         public string Address { get; set; }
 
         public string Website { get; set; }
 
-        public DateTime? DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
-        public List<PhoneNumber> PhoneNumbers { get; set; }
+        public List<PhoneNumber> Phones { get; set; }
+
     }
 }

@@ -11,14 +11,15 @@ using System;
 namespace ContactList.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180222111023_AllMigration")]
-    partial class AllMigration
+    [Migration("20180222162028_PersonAndPhoneNumberTable")]
+    partial class PersonAndPhoneNumberTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
+                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("ContactList.Models.ApplicationUser", b =>
                 {
@@ -65,7 +66,8 @@ namespace ContactList.Data.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex");
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -77,7 +79,7 @@ namespace ContactList.Data.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<DateTime?>("DateOfBirth");
+                    b.Property<DateTime>("DateOfBirth");
 
                     b.Property<string>("FullName")
                         .IsRequired();
@@ -104,8 +106,7 @@ namespace ContactList.Data.Migrations
 
                     b.Property<Guid>("PersonId");
 
-                    b.Property<string>("Phone")
-                        .IsRequired();
+                    b.Property<string>("Phone");
 
                     b.HasKey("Id");
 
@@ -132,7 +133,8 @@ namespace ContactList.Data.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex");
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -232,7 +234,7 @@ namespace ContactList.Data.Migrations
             modelBuilder.Entity("ContactList.Models.PhoneNumber", b =>
                 {
                     b.HasOne("ContactList.Models.Person", "Person")
-                        .WithMany("PhoneNumbers")
+                        .WithMany("Phones")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

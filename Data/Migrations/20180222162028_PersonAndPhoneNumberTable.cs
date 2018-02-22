@@ -1,13 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
 namespace ContactList.Data.Migrations
 {
-    public partial class AllMigration : Migration
+    public partial class PersonAndPhoneNumberTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers");
+
             migrationBuilder.DropIndex(
                 name: "IX_AspNetUserRoles_UserId",
                 table: "AspNetUserRoles");
@@ -16,13 +21,27 @@ namespace ContactList.Data.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles");
 
+            migrationBuilder.AlterColumn<int>(
+                name: "Id",
+                table: "AspNetUserClaims",
+                nullable: false,
+                oldClrType: typeof(int))
+                .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            migrationBuilder.AlterColumn<int>(
+                name: "Id",
+                table: "AspNetRoleClaims",
+                nullable: false,
+                oldClrType: typeof(int))
+                .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
             migrationBuilder.CreateTable(
                 name: "Person",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Address = table.Column<string>(nullable: true),
-                    DateOfBirth = table.Column<DateTime>(nullable: true),
+                    DateOfBirth = table.Column<DateTime>(nullable: false),
                     FullName = table.Column<string>(nullable: false),
                     NickName = table.Column<string>(nullable: false),
                     UserId = table.Column<string>(nullable: false),
@@ -45,7 +64,7 @@ namespace ContactList.Data.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     PersonId = table.Column<Guid>(nullable: false),
-                    Phone = table.Column<string>(nullable: false)
+                    Phone = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -59,10 +78,18 @@ namespace ContactList.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Person_UserId",
@@ -74,20 +101,20 @@ namespace ContactList.Data.Migrations
                 table: "PhoneNumbers",
                 column: "PersonId");
 
-            // migrationBuilder.AddForeignKey(
-            //     name: "FK_AspNetUserTokens_AspNetUsers_UserId",
-            //     table: "AspNetUserTokens",
-            //     column: "UserId",
-            //     principalTable: "AspNetUsers",
-            //     principalColumn: "Id",
-            //     onDelete: ReferentialAction.Cascade);
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                table: "AspNetUserTokens",
+                column: "UserId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            // migrationBuilder.DropForeignKey(
-            //     name: "FK_AspNetUserTokens_AspNetUsers_UserId",
-            //     table: "AspNetUserTokens");
+            migrationBuilder.DropForeignKey(
+                name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                table: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
                 name: "PhoneNumbers");
@@ -96,8 +123,32 @@ namespace ContactList.Data.Migrations
                 name: "Person");
 
             migrationBuilder.DropIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "Id",
+                table: "AspNetUserClaims",
+                nullable: false,
+                oldClrType: typeof(int))
+                .OldAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            migrationBuilder.AlterColumn<int>(
+                name: "Id",
+                table: "AspNetRoleClaims",
+                nullable: false,
+                oldClrType: typeof(int))
+                .OldAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers",
+                column: "NormalizedUserName",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserRoles_UserId",
