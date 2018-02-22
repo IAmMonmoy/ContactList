@@ -11,9 +11,10 @@ using System;
 namespace ContactList.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180222081441_PersonTable")]
+    partial class PersonTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,23 +90,6 @@ namespace ContactList.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Persons");
-                });
-
-            modelBuilder.Entity("ContactList.Models.PhoneNumber", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("PersonId");
-
-                    b.Property<string>("Phone")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("PhoneNumber");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -213,14 +197,6 @@ namespace ContactList.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("ContactList.Models.PhoneNumber", b =>
-                {
-                    b.HasOne("ContactList.Models.Person", "Person")
-                        .WithMany("PhoneNumbers")
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
