@@ -15,6 +15,10 @@ namespace ContactList.Data
         {
         }
 
+        public DbSet<Person> Person { get; set; }
+
+        public DbSet<PhoneNumber> PhoneNumbers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
