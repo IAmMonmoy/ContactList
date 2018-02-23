@@ -93,7 +93,7 @@ namespace ContactList.Services
                 fullContactViewModel.Add(add);
             }
 
-            return fullContactViewModel;
+            return fullContactViewModel.ToArray();
         }
     }
 }

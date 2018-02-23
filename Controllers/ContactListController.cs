@@ -22,9 +22,14 @@ namespace ContactList.Controllers
             _contactService = contactService;
             _user = user;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var currentUser = await _user.GetUserAsync(User);
+            if(currentUser == null) return Challenge();
+
+            var temp = _contactService.GetContactsAsync(currentUser);
+
+            return Json(temp);
         }
 
         [Authorize]
