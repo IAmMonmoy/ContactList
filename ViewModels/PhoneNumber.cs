@@ -6,6 +6,7 @@ namespace ContactList.ViewModels
     public class PhoneNumber
     {
         [Required]
+        [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
     }
 }
