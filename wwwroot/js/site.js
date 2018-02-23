@@ -5,5 +5,5 @@ $( document ).ready(function(){
 
 function addPhoneNumber()
 {
-    $('.staticFormContent').append('<div class="form-group"><div class="row"><div class="col-md-10"><input class="form-control" id="phoneNumber" placeholder="Phone Number" type="text"></div></div></div>');
+    $('.staticFormContent').append('<div class="form-group"><div class="row"><div class="col-md-10"><input class="form-control" id="phoneNumber[]" placeholder="Phone Number" type="text"></div></div></div>');
 }
