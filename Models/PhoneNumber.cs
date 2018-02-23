@@ -7,6 +7,9 @@ namespace ContactList.Models
     {
         public Guid Id { get; set; }
 
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [StringLength(20, MinimumLength = 5)]
         public string Phone { get; set; }
 
         public Person Person { get; set; }
