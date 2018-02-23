@@ -47,5 +47,17 @@ namespace ContactList.Services
             
             return saveResult == totalChanges;
         }
+
+        public Task<IEnumerable<ContactFormViewModel>> GetContactsAsync(ApplicationUser user)
+        {
+            throw new NotImplementedException();
+            // var entity = await _context.Person
+            //                 .Include(person => person.Phones).ToArrayAsync();
+
+            // ContactFormViewModel contact = new ContactFormViewModel
+            // {
+                
+            // };
+        }
     }
 }
