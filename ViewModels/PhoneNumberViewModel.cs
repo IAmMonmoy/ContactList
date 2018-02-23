@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ContactList.ViewModels
 {
-    public class PhoneNumber
+    public class PhoneNumberViewModel
     {
         [Required]
         [DataType(DataType.PhoneNumber)]

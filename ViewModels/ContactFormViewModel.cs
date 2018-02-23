@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace ContactList.ViewModels
 {
@@ -19,6 +20,8 @@ namespace ContactList.ViewModels
 
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
+
+        public List<PhoneNumberViewModel> Phones { get; set; }
 
     }
 }
