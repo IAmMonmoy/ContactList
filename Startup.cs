@@ -35,6 +35,7 @@ namespace ContactList
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddScoped<IContactListService,ContactListService>();
 
             services.AddMvc();
         }
