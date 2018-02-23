@@ -1,10 +1,12 @@
 using System;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using ContactList.Models;
-using ContactList.ViewModels;
+using System.Threading.Tasks;
+using System.Linq;
 using ContactList.Data;
-using Microsoft.AspNetCore.Identity;
+using ContactList.Models;
+using Microsoft.EntityFrameworkCore;
+using ContactList.ViewModels;
+
 
 namespace ContactList.Services
 {
@@ -48,16 +50,50 @@ namespace ContactList.Services
             return saveResult == totalChanges;
         }
 
-        public Task<IEnumerable<ContactFormViewModel>> GetContactsAsync(ApplicationUser user)
+        public async Task<IEnumerable<FullContactListViewModel>> GetContactsAsync(ApplicationUser user)
         {
-            throw new NotImplementedException();
-            // var entity = await _context.Person
-            //                 .Include(person => person.Phones).ToArrayAsync();
+            var entity = await _context.Person.Where( x => x.UserId == user.Id)
+                                              .Include(person => person.Phones)
+                                              .ToListAsync();
+            
+            List<FullContactListViewModel> fullContactViewModel = new List<FullContactListViewModel>();
+            
+            foreach(var en in entity)
+            {
+                List<PhoneNumber> phoneNumber = new List<PhoneNumber>();
+                foreach(PhoneNumber phone in en.Phones)
+                {
+                    PhoneNumber number = new PhoneNumber
+                    {
+                        Id = phone.Id,
+                        PersonId = phone.PersonId,
+                        Phone = phone.Phone
+                    };
 
-            // ContactFormViewModel contact = new ContactFormViewModel
-            // {
+                    phoneNumber.Add(number);
+                }
+
+                Person person = new Person
+                {
+                    Id = en.Id,
+                    UserId = en.UserId,
+                    NickName = en.NickName,
+                    FullName = en.FullName,
+                    Address = en.Address,
+                    Website = en.Website,
+                    DateOfBirth = en.DateOfBirth
+                };
                 
-            // };
+                FullContactListViewModel add = new FullContactListViewModel
+                {
+                    Person  = person,
+                    PhoneNumbers = phoneNumber
+                };
+
+                fullContactViewModel.Add(add);
+            }
+
+            return fullContactViewModel;
         }
     }
 }

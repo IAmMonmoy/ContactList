@@ -5,7 +5,7 @@ using ContactList.Models;
 
 namespace ContactList.ViewModels
 {
-    public class FullContactViewModel
+    public class FullContactListViewModel
     {
         public Person Person { get; set; }
 

@@ -10,6 +10,6 @@ namespace ContactList.Services
     {
         Task<bool> CreateContact(ContactFormViewModel contact, ApplicationUser user);
 
-        Task<IEnumerable<ContactFormViewModel>> GetContactsAsync(ApplicationUser user);
+        Task<IEnumerable<FullContactListViewModel>> GetContactsAsync(ApplicationUser user);
     }
 }
