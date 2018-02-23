@@ -7,11 +7,21 @@ using Microsoft.AspNetCore.Mvc;
 using ContactList.Models;
 using ContactList.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using ContactList.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace ContactList.Controllers
 {
     public class ContactList : Controller
     {
+        private readonly IContactListService _contactService;
+        private readonly UserManager<ApplicationUser> _user;
+
+        public ContactList(IContactListService contactService, UserManager<ApplicationUser> user)
+        {
+            _contactService = contactService;
+            _user = user;
+        }
         public IActionResult Index()
         {
             return View();
@@ -25,9 +35,25 @@ namespace ContactList.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult ContactCreate(ContactFormViewModel contactForm)
+        public async Task<IActionResult> ContactCreate(ContactFormViewModel contactForm)
         {
-            return Json(contactForm);
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var currentUser = await _user.GetUserAsync(User);
+
+            if(currentUser == null) return Unauthorized();
+
+            var successfull = await _contactService.CreateContact(contactForm,currentUser);
+
+            if(!successfull)
+            {
+                return BadRequest(new { error = "Could not add item. Please try again"});
+            }
+
+            return Ok();
             //return View();
         }
     }
