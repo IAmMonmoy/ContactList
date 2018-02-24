@@ -75,7 +75,20 @@ namespace ContactList.Services
 
         public async Task<bool> UpdateContactAsync(Person person, Guid id)
         {
+            var entity = await _context.Person.Where(x => x.Id == personId)
+                                 .Include(x => x.Phones)
+                                 .SingleAsync();
+                
+            entity.NickName = person.NickName;
+            entity.FullName = person.FullName;
+            entity.Address = person.Address;
+            entity.Website = person.Website;
+            entity.DateOfBirth = person.DateOfBirth;
+            entity.Phones = person.Phones;
 
+            await entity.SaveChangesAsync();
+
+            return 1;
         }
     }
 }
