@@ -4,12 +4,10 @@
     ViewData["Title"] = "Edit Contact";
 }
 
-<h1>Edit Contact</h1>
-
 <div class="row">
-
-    <div class="col-sm-5">
-
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+        <h1 style="text-align:center; margin:20px;">Edit Contact</h1>
         <form asp-controller="ContactList" asp-action="ContactUpdate" method="POST">
             <div class="staticFormContent">
                  <input type="hidden" name="personId" value="@Model.Id"></input>
@@ -53,7 +51,7 @@
                
             </div>
            
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-success">Update</button>
 
         </form>
 

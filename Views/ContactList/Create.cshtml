@@ -4,12 +4,12 @@
     ViewData["Title"] = "Create Contact";
 }
 
-<h1>Create Contact</h1>
+
 
 <div class="row">
-
-    <div class="col-sm-5">
-
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+        <h1 style="text-align:center; margin:20px;">Create Contact</h1>
         <form asp-controller="ContactList" asp-action="ContactCreate" method="POST">
             <div class="staticFormContent">
                  <div class="form-group">
@@ -42,7 +42,7 @@
                 </div>
             </div>
            
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button type="submit" class="btn btn-success">Create</button>
 
         </form>
 
