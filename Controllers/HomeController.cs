@@ -14,7 +14,7 @@ namespace ContactList.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "ContactList");
         }
 
         public IActionResult About()
