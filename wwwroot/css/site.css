@@ -6,6 +6,7 @@
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    height: 100%;
 }
 
 /* Wrapping element */
@@ -35,6 +36,12 @@ body {
     font-size: 30px;
 }
 
+#footer {
+   position: fixed;
+   bottom: 0;
+   text-align: center;
+   left: 45%;
+ }
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
