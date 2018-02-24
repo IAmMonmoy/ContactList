@@ -109,7 +109,7 @@ namespace ContactList.Controllers
             if(currentUser == null) return Challenge();
 
             var temp = await _contactService.GetContactsAsync(currentUser);
-
+            
             return View();
         }
     }
