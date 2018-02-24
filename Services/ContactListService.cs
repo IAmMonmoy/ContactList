@@ -68,7 +68,9 @@ namespace ContactList.Services
 
         public async Task<Person> GetContactByIdAsync(Guid personId)
         {
-            return await _context.Person.FindAsync(personId);
+            return await _context.Person.Where(x => x.Id == personId)
+                                 .Include(x => x.Phones)
+                                 .SingleAsync();
         }
     }
 }
