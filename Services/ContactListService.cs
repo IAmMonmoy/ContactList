@@ -6,7 +6,7 @@ using ContactList.Data;
 using ContactList.Models;
 using Microsoft.EntityFrameworkCore;
 using ContactList.ViewModels;
-
+using System.Text;
 
 namespace ContactList.Services
 {
@@ -94,6 +94,29 @@ namespace ContactList.Services
                 return 2==1;
             }
             
+        }
+
+        public string BuildCsvString(AllContactListViewModel list)
+        {
+            StringBuilder csvContent = new StringBuilder();
+            
+            csvContent.AppendLine("Full Name,Nick Name,Phone,Address,Website,Date Of Birth");
+
+            foreach(Person person in list.contactList)
+            {
+                string phones = "";
+                foreach (var phone in person.Phones)
+                {
+                    phones += phone.Phone.ToString()+" ";
+                }
+
+                string final = person.FullName+","+person.NickName+","+phones
+                                +","+person.Address+","+person.Website+","+person.DateOfBirth;
+                
+                csvContent.AppendLine(final);
+            }
+
+            return csvContent.ToString();
         }
     }
 }
