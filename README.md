@@ -2,6 +2,7 @@
 
 ## Basic Requirements
     [Asp DotNet Core SDK](https://www.microsoft.com/net/learn/get-started/windows/).
+    [GitHub Pages](https://pages.github.com/)
     Microsoft Sql Server
     
 ## Run
