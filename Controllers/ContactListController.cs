@@ -22,6 +22,8 @@ namespace ContactList.Controllers
             _contactService = contactService;
             _user = user;
         }
+        
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var currentUser = await _user.GetUserAsync(User);
