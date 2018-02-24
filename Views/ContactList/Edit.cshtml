@@ -1,4 +1,4 @@
-@model ContactFormViewModel
+@model Person
 
 @{
     ViewData["Title"] = "Edit Contact";
@@ -13,36 +13,44 @@
         <form asp-controller="ContactList" asp-action="ContactCreate" method="POST">
             <div class="staticFormContent">
                  <div class="form-group">
-                    <input asp-for="FullName" type="text" class="form-control" placeholder="Full Name">
+                    <input value="Model.FullName" asp-for="FullName" type="text" class="form-control" placeholder="Full Name">
                 </div>
                 
                 <div class="form-group">
-                    <input asp-for="NickName" type="text" class="form-control" placeholder="Nick Name">
+                    <input value="Model.NickName" asp-for="NickName" type="text" class="form-control" placeholder="Nick Name">
                 </div>
 
                 <div class="form-group">
-                    <input asp-for="Address" type="text" class="form-control" placeholder="Address">
+                    <input value="Model.Address" asp-for="Address" type="text" class="form-control" placeholder="Address">
                 </div>
 
                 <div class="form-group">
-                    <input asp-for="Website" type="text" class="form-control" placeholder="Website">
+                    <input value="Model.Website" asp-for="Website" type="text" class="form-control" placeholder="Website">
                 </div>
 
                 <div class="form-group">
-                    <input asp-for="DateOfBirth" type="date" class="form-control" placeholder="Date Of Birth">
+                    <input value="Model.DateOfBirth" asp-for="DateOfBirth" type="date" class="form-control" placeholder="Date Of Birth">
                 </div>
 
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <input name="Phones[0].Phone" type="text" class="form-control phoneNumber" placeholder="Phone Number">
+                @var arrayCount = 0;
+                @foreach(Phone phone in Model.Phones)
+                {
+                    var makeName = "Phones["+arrayCount+"].Phone";
+                    arrayCount = arrayCount + 1;
+
+                     <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <input value="phone.Phone" name="@makeName" type="text" class="form-control phoneNumber" placeholder="Phone Number">
+                            </div>
+                            <div class="col-md-2"><i id="addPhone" class="fa fa-plus-circle"></i></div>
                         </div>
-                        <div class="col-md-2"><i id="addPhone" class="fa fa-plus-circle"></i></div>
                     </div>
-                </div>
+                }
+               
             </div>
            
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button type="submit" class="btn btn-primary">Update</button>
 
         </form>
 
