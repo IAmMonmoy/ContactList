@@ -46,6 +46,12 @@ namespace ContactList.Controllers
         }
 
         [Authorize]
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> ContactCreate(ContactFormViewModel contactForm)
         {
