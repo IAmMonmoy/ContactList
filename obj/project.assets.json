@@ -13215,11 +13215,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "i:\\github\\ContactList\\ContactList.csproj",
+      "projectUniqueName": "I:\\github\\ContactList\\ContactList.csproj",
       "projectName": "ContactList",
-      "projectPath": "i:\\github\\ContactList\\ContactList.csproj",
+      "projectPath": "I:\\github\\ContactList\\ContactList.csproj",
       "packagesPath": "C:\\Users\\iammo\\.nuget\\packages\\",
-      "outputPath": "i:\\github\\ContactList\\obj\\",
+      "outputPath": "I:\\github\\ContactList\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

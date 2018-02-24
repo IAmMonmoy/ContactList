@@ -9,7 +9,7 @@ using ContactList.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using ContactList.Services;
 using Microsoft.AspNetCore.Identity;
-using System.Text;
+using System.IO;
 
 namespace ContactList.Controllers
 {
@@ -18,6 +18,7 @@ namespace ContactList.Controllers
     {
         private readonly IContactListService _contactService;
         private readonly UserManager<ApplicationUser> _user;
+        
 
         public ContactList(IContactListService contactService, UserManager<ApplicationUser> user)
         {
@@ -109,8 +110,17 @@ namespace ContactList.Controllers
             if(currentUser == null) return Challenge();
 
             var temp = await _contactService.GetContactsAsync(currentUser);
+
+            AllContactListViewModel list = new AllContactListViewModel
+            {
+                contactList = temp
+            };
             
-            return View();
+            var memory = new MemoryStream();
+
+            memory = await _contactService.BuildCsvString(list);
+            
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", @"ContactList.xlsx");
         }
     }
 }

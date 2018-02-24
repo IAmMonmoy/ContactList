@@ -6,17 +6,23 @@ using ContactList.Data;
 using ContactList.Models;
 using Microsoft.EntityFrameworkCore;
 using ContactList.ViewModels;
-using System.Text;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 
 namespace ContactList.Services
 {
     public class ContactListService : IContactListService
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
-        public ContactListService(ApplicationDbContext context)
+        public ContactListService(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public async Task<bool> CreateContact(ContactFormViewModel contact, ApplicationUser user)
@@ -96,27 +102,59 @@ namespace ContactList.Services
             
         }
 
-        public string BuildCsvString(AllContactListViewModel list)
+        public async Task<MemoryStream> BuildCsvString(AllContactListViewModel list)
         {
-            StringBuilder csvContent = new StringBuilder();
-            
-            csvContent.AppendLine("Full Name,Nick Name,Phone,Address,Website,Date Of Birth");
-
-            foreach(Person person in list.contactList)
+             string sWebRootFolder = _hostingEnvironment.WebRootPath;
+            string sFileName = @"ContactList.xlsx";
+            FileInfo file = new FileInfo(Path.Combine(sWebRootFolder, sFileName));
+            var memory = new MemoryStream();
+            using (var fs = new FileStream(Path.Combine(sWebRootFolder, sFileName), FileMode.Create, FileAccess.Write))
             {
-                string phones = "";
-                foreach (var phone in person.Phones)
-                {
-                    phones += phone.Phone.ToString()+" ";
-                }
+                IWorkbook workbook;
+                workbook = new XSSFWorkbook();
+                ISheet excelSheet = workbook.CreateSheet("ContactList");
 
-                string final = person.FullName+","+person.NickName+","+phones
-                                +","+person.Address+","+person.Website+","+person.DateOfBirth;
+                IRow row = excelSheet.CreateRow(0);
+
+                row.CreateCell(0).SetCellValue("Full Name");
+                row.CreateCell(1).SetCellValue("Nick Name");
+                row.CreateCell(2).SetCellValue("Phone");
+                row.CreateCell(3).SetCellValue("Address");
+                row.CreateCell(4).SetCellValue("Website");
+                row.CreateCell(5).SetCellValue("Birth Date");
+
+                var i = 1;
+                foreach(Person person in list.contactList)
+                {
+                    string phones = "";
+                    foreach (var phone in person.Phones)
+                    {
+                        phones += phone.Phone.ToString()+" ";
+                    }
+
+                    row = excelSheet.CreateRow(i);
+                    row.CreateCell(0).SetCellValue(person.FullName);
+                    row.CreateCell(1).SetCellValue(person.NickName);
+                    row.CreateCell(2).SetCellValue(phones);
+                    row.CreateCell(3).SetCellValue(person.Address);
+                    row.CreateCell(4).SetCellValue(person.Website);
+                    row.CreateCell(5).SetCellValue(person.DateOfBirth.Date.ToString("yyyy/MM/dd"));
+
+                    i++;
+                }
                 
-                csvContent.AppendLine(final);
+                workbook.Write(fs);
+
+
+                using (var stream = new FileStream(Path.Combine(sWebRootFolder, sFileName), FileMode.Open))
+                {
+                    await stream.CopyToAsync(memory);
+                }
+                memory.Position = 0;
+
             }
 
-            return csvContent.ToString();
+            return memory;
         }
     }
 }

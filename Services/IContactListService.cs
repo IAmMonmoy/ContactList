@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using ContactList.Models;
 using ContactList.ViewModels;
+using System.IO;
 
 namespace ContactList.Services
 {
@@ -18,6 +19,6 @@ namespace ContactList.Services
 
         Task<bool> UpdateContactAsync(Person person, Guid personId);
 
-        string BuildCsvString(AllContactListViewModel list);
+        Task<MemoryStream> BuildCsvString(AllContactListViewModel list);
     }
 }
