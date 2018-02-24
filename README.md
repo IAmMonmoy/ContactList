@@ -1,14 +1,13 @@
 # ContactList
 
 ## Basic Requirements
-    [Asp DotNet Core SDK](https://www.microsoft.com/net/learn/get-started/windows/).
-    [GitHub Pages](https://pages.github.com/)
-    Microsoft Sql Server
+   [Asp DotNet Core SDK](https://www.microsoft.com/net/learn/get-started/windows/).
+   Microsoft Sql Server
     
 ## Run
-    Clone the repository.
-    Open terminal in the repository.
-    type **dotnet-run**.
+   Clone the repository.
+   Open terminal in the repository.
+   type **dotnet-run**.
     
 ## Description
     -Every authenticated user can create contact list.
