@@ -68,5 +68,17 @@ namespace ContactList.Controllers
             return Ok();
             //return View();
         }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> ContactDelete(string deleteButton)
+        {
+             var currentUser = await _user.GetUserAsync(User);
+
+                if(currentUser == null) return Unauthorized();
+
+                return Json(deleteButton);
+            
+        }
     }
 }
