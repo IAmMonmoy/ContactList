@@ -29,7 +29,12 @@ namespace ContactList.Controllers
 
             var temp = _contactService.GetContactsAsync(currentUser);
 
-            return Json(temp);
+            AllContactListViewModel all = new AllContactListViewModel
+            {
+                contactList = (IEnumerable<FullContactListViewModel>)temp
+            };
+
+            return Json(all);
         }
 
         [Authorize]
