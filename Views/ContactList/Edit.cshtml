@@ -12,6 +12,7 @@
 
         <form asp-controller="ContactList" asp-action="ContactUpdate" method="POST">
             <div class="staticFormContent">
+                 <input type="hidden" name="personId" value="@Model.Id"></input>
                  <div class="form-group">
                     <input value="@Model.FullName" asp-for="FullName" type="text" class="form-control" placeholder="Full Name">
                 </div>

@@ -91,5 +91,12 @@ namespace ContactList.Controllers
 
             return RedirectToAction("Index");
         }   
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> ContactUpdate(Person person, Guid personId)
+        {
+            return View();
+        }   
     }
 }
