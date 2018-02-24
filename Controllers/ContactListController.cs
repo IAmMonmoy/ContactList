@@ -73,12 +73,14 @@ namespace ContactList.Controllers
         [HttpPost]
         public async Task<IActionResult> ContactDelete(Guid deleteButton)
         {
-             var currentUser = await _user.GetUserAsync(User);
+            var successfull = await _contactService.DeleteContact(deleteButton);
 
-                if(currentUser == null) return Unauthorized();
+            if(!successfull)
+            {
+                return BadRequest(new { error = "Could not delete item. Please try again"});
+            }
 
-                return Json(deleteButton);
-            
-        }
+            return RedirectToAction("Index");
+        }   
     }
 }
