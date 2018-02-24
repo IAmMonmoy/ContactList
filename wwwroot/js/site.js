@@ -1,7 +1,9 @@
 ﻿// Write your JavaScript code.
 var i = 0;
+
 $( document ).ready(function(){
     $('#addPhone').on('click', addPhoneNumber);
+    $('#contactTable').DataTable();
 });
 
 function addPhoneNumber()
