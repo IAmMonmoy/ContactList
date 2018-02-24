@@ -57,5 +57,14 @@ namespace ContactList.Services
                                               .ToArrayAsync();
         }
 
+        public async Task<bool> DeleteContact(Guid PersonId)
+        {
+            _context.Person.Remove(await _context.Person.FindAsync(PersonId));
+
+            var deleteResult = await _context.SaveChangesAsync();
+
+            return deleteResult == 1;
+        }
+
     }
 }

@@ -11,5 +11,7 @@ namespace ContactList.Services
         Task<bool> CreateContact(ContactFormViewModel contact, ApplicationUser user);
 
         Task<IEnumerable<Person>> GetContactsAsync(ApplicationUser user);
+
+        Task<bool> DeleteContact(string PersonId);
     }
 }

@@ -71,7 +71,7 @@ namespace ContactList.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> ContactDelete(string deleteButton)
+        public async Task<IActionResult> ContactDelete(Guid deleteButton)
         {
              var currentUser = await _user.GetUserAsync(User);
 
