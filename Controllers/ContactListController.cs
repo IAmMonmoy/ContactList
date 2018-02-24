@@ -31,7 +31,7 @@ namespace ContactList.Controllers
 
             AllContactListViewModel all = new AllContactListViewModel
             {
-                contactList = (IEnumerable<FullContactListViewModel>)temp
+                contactList = temp
             };
 
             return Json(all);
