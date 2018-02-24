@@ -16,6 +16,6 @@ namespace ContactList.Services
 
         Task<Person> GetContactByIdAsync(Guid personId);
 
-        Task<bool> UpdateContactAsync(Person person, Guid id);
+        Task<bool> UpdateContactAsync(Person person, Guid personId);
     }
 }

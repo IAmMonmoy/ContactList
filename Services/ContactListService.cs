@@ -73,7 +73,7 @@ namespace ContactList.Services
                                  .SingleAsync();
         }
 
-        public async Task<bool> UpdateContactAsync(Person person, Guid id)
+        public async Task<bool> UpdateContactAsync(Person person, Guid personId)
         {
             var entity = await _context.Person.Where(x => x.Id == personId)
                                  .Include(x => x.Phones)
@@ -85,10 +85,15 @@ namespace ContactList.Services
             entity.Website = person.Website;
             entity.DateOfBirth = person.DateOfBirth;
             entity.Phones = person.Phones;
-
-            await entity.SaveChangesAsync();
-
-            return 1;
+            try{
+                await _context.SaveChangesAsync();
+                return 1 == 1;
+            }
+            
+            catch{
+                return 2==1;
+            }
+            
         }
     }
 }

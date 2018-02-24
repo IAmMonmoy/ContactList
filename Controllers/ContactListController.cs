@@ -74,7 +74,7 @@ namespace ContactList.Controllers
                 return BadRequest(new { error = "Could not add item. Please try again"});
             }
 
-            return Ok();
+            return RedirectToAction("Index");
             //return View();
         }
 
@@ -96,8 +96,14 @@ namespace ContactList.Controllers
         [HttpPost]
         public async Task<IActionResult> ContactUpdate(Person person, Guid personId)
         {
-             var currentUser = await _user.GetUserAsync(User);
-            return Json(personId);
+             var saveResult = await _contactService.UpdateContactAsync(person,personId);
+
+             if(!saveResult)
+             {
+                 return BadRequest(new { error = "Could not delete item. Please try again"});
+             }
+
+            return RedirectToAction("Index");
         }   
     }
 }
