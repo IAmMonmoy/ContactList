@@ -1,5 +1,24 @@
+@model AllContactListViewModel
+
 @{
-    ViewData["Title"] = "Main Home Page";
+    ViewData["Title"] = "All Contacts";
 }
 
-<h1>Main Home Page</h1>
+<h1>Full Contacts List</h1>
+
+<table>
+    <tr>
+        <th>Full Name</th>
+        <th>Nick Name</th>
+        <th>Phone Number</th>
+        <th>Address</th>
+        <th>Website</th>
+        <th>Date Of Birth</th>
+        <th>Full Name</th>
+    </tr>
+
+    @foreach(FullContactViewModel var in AllContactListViewModel)
+    {
+        
+    }
+</table>

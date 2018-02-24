@@ -50,50 +50,11 @@ namespace ContactList.Services
             return saveResult == totalChanges;
         }
 
-        public async Task<IEnumerable<FullContactListViewModel>> GetContactsAsync(ApplicationUser user)
+        public async Task<IEnumerable<Person>> GetContactsAsync(ApplicationUser user)
         {
-            var entity = await _context.Person.Where( x => x.UserId == user.Id)
+           return await _context.Person.Where( x => x.UserId == user.Id)
                                               .Include(person => person.Phones)
-                                              .ToListAsync();
-            
-            List<FullContactListViewModel> fullContactViewModel = new List<FullContactListViewModel>();
-            
-            foreach(var en in entity)
-            {
-                List<PhoneNumber> phoneNumber = new List<PhoneNumber>();
-                foreach(PhoneNumber phone in en.Phones)
-                {
-                    PhoneNumber number = new PhoneNumber
-                    {
-                        Id = phone.Id,
-                        PersonId = phone.PersonId,
-                        Phone = phone.Phone
-                    };
-
-                    phoneNumber.Add(number);
-                }
-
-                Person person = new Person
-                {
-                    Id = en.Id,
-                    UserId = en.UserId,
-                    NickName = en.NickName,
-                    FullName = en.FullName,
-                    Address = en.Address,
-                    Website = en.Website,
-                    DateOfBirth = en.DateOfBirth
-                };
-                
-                FullContactListViewModel add = new FullContactListViewModel
-                {
-                    Person  = person,
-                    PhoneNumbers = phoneNumber
-                };
-
-                fullContactViewModel.Add(add);
-            }
-
-            return fullContactViewModel.ToArray();
+                                              .ToArrayAsync();
         }
     }
 }
