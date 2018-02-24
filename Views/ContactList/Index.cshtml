@@ -7,29 +7,34 @@
 <h1>Full Contacts List</h1>
 
 <table id = "contactTable">
-    <tr>
-        <th>Full Name</th>
-        <th>Nick Name</th>
-        <th>Phone Number</th>
-        <th>Address</th>
-        <th>Website</th>
-        <th>Date Of Birth</th>
-    </tr>
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Nick Name</th>
+            <th>Phone Number</th>
+            <th>Address</th>
+            <th>Website</th>
+            <th>Date Of Birth</th>
+        </tr>
+    </thead>
+    
 
     @foreach(Person person in Model.contactList)
     {
-        <tr>
-            <td>@person.FullName</td>
-            <td>@person.NickName</td>
-            <td>
-                @foreach (var phone in person.Phones)
-                {
-                    <p>@phone.Phone</p>
-                }
-            </td>
-            <td>@person.Address</td>
-            <td>@person.Website</td>
-            <td>@person.DateOfBirth</td>
-        </tr>
+        <tbody>
+            <tr>
+                <td>@person.FullName</td>
+                <td>@person.NickName</td>
+                <td>
+                    @foreach (var phone in person.Phones)
+                    {
+                        <p>@phone.Phone</p>
+                    }
+                </td>
+                <td>@person.Address</td>
+                <td>@person.Website</td>
+                <td>@person.DateOfBirth</td>
+            </tr>
+        </tbody>
     }
 </table>
