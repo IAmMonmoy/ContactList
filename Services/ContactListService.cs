@@ -66,5 +66,9 @@ namespace ContactList.Services
             return deleteResult == 1;
         }
 
+        public async Task<Person> GetContactByIdAsync(Guid personId)
+        {
+            return await _context.Person.FindAsync(personId);
+        }
     }
 }

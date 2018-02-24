@@ -13,5 +13,7 @@ namespace ContactList.Services
         Task<IEnumerable<Person>> GetContactsAsync(ApplicationUser user);
 
         Task<bool> DeleteContact(Guid PersonId);
+
+        Task<Person> GetContactByIdAsync(Guid personId);
     }
 }
