@@ -56,5 +56,6 @@ namespace ContactList.Services
                                               .Include(person => person.Phones)
                                               .ToArrayAsync();
         }
+
     }
 }

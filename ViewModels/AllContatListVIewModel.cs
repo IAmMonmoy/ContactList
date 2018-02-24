@@ -7,6 +7,6 @@ namespace ContactList.ViewModels
 {
     public class AllContactListViewModel
     {
-        public IEnumerable<FullContactListViewModel> contactList { get; set; }
+        public IEnumerable<Person> contactList { get; set; }
     }
 }
