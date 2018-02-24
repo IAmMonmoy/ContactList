@@ -5014,6 +5014,18 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "WebApiContrib.Core.Formatter.Csv/2.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Core": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/WebApiContrib.Core.Formatter.Csv.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/WebApiContrib.Core.Formatter.Csv.dll": {}
+        }
+      },
       "WindowsAzure.Storage/8.1.4": {
         "type": "package",
         "dependencies": {
@@ -13092,6 +13104,16 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
+    "WebApiContrib.Core.Formatter.Csv/2.0.2": {
+      "sha512": "FtlBFPe5BHj9Vrok7aRWcImMnGOo9o/To6Wt7kDm8eqIAS13vZrOyqbZFnJihqdXMvh0KCh+4/VwPblApdfa8g==",
+      "type": "package",
+      "path": "webapicontrib.core.formatter.csv/2.0.2",
+      "files": [
+        "lib/netstandard2.0/WebApiContrib.Core.Formatter.Csv.dll",
+        "webapicontrib.core.formatter.csv.2.0.2.nupkg.sha512",
+        "webapicontrib.core.formatter.csv.nuspec"
+      ]
+    },
     "WindowsAzure.Storage/8.1.4": {
       "sha512": "W6ZZ0/o7+3Qb77mRAQyLjPudHG3OMeeQ4p9yY13PUdJArmRCx2cLMm5F4tpIjJXxzHC0ew0oK7DMDGILMdfCnw==",
       "type": "package",
@@ -13120,7 +13142,8 @@
       "Microsoft.AspNetCore.All >= 2.0.5",
       "Microsoft.EntityFrameworkCore.Tools >= 2.0.1",
       "Microsoft.NETCore.App >= 2.0.0",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.2"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.2",
+      "WebApiContrib.Core.Formatter.Csv >= 2.0.2"
     ]
   },
   "packageFolders": {
@@ -13130,11 +13153,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "I:\\github\\ContactList\\ContactList.csproj",
+      "projectUniqueName": "i:\\github\\ContactList\\ContactList.csproj",
       "projectName": "ContactList",
-      "projectPath": "I:\\github\\ContactList\\ContactList.csproj",
+      "projectPath": "i:\\github\\ContactList\\ContactList.csproj",
       "packagesPath": "C:\\Users\\iammo\\.nuget\\packages\\",
-      "outputPath": "I:\\github\\ContactList\\obj\\",
+      "outputPath": "i:\\github\\ContactList\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13180,6 +13203,10 @@
           },
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "suppressParent": "All",
+            "target": "Package",
+            "version": "[2.0.2, )"
+          },
+          "WebApiContrib.Core.Formatter.Csv": {
             "target": "Package",
             "version": "[2.0.2, )"
           }

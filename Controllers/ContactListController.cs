@@ -9,6 +9,7 @@ using ContactList.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using ContactList.Services;
 using Microsoft.AspNetCore.Identity;
+using System.Text;
 
 namespace ContactList.Controllers
 {
@@ -104,6 +105,18 @@ namespace ContactList.Controllers
              }
 
             return RedirectToAction("Index");
-        }   
+        }
+        
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> DownloadCsv()
+        {
+            var currentUser = await _user.GetUserAsync(User);
+            if(currentUser == null) return Challenge();
+
+            var temp = await _contactService.GetContactsAsync(currentUser);
+
+            return View();
+        }
     }
 }
