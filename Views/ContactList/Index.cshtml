@@ -35,7 +35,11 @@
                 <td>@person.Address</td>
                 <td>@person.Website</td>
                 <td>@person.DateOfBirth</td>
-                <td><button class="btn btn-danger" name="@person.Id">Delete</button></td>
+                <td> 
+                    <form asp-controller="ContactList" asp-action="ContactDelete" method="POST">
+                        <button class="btn btn-danger" name="deleteButton" value="@person.Id">Delete</button>
+                    </form> 
+                </td>
             </tr>
         </tbody>
     }
