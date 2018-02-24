@@ -6,6 +6,15 @@
 
 <h1>Full Contacts List</h1>
 
+<div class="row">
+    <div class="col-md-5"></div>
+    <div class="col-md-2">
+        <form asp-controller="ContactList" asp-action="DownloadCsv" method="POST">
+            <button style="margin:10px;" class="btn btn-info" name="downloadCsv">Download CSV file</button>
+        </form> 
+    </div>
+</div>
+
 <table id = "contactTable">
     <thead>
         <tr>
