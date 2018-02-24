@@ -46,9 +46,12 @@ namespace ContactList.Controllers
         }
 
         [Authorize]
-        public IActionResult Edit()
+        [HttpPost]
+        public async Task<IActionResult> Edit(Guid personId)
         {
-            return View();
+            var entity = await _contactService.GetContactByIdAsync(personId);
+            Person person = entity;
+            return View(entity);
         }
 
         [Authorize]
