@@ -27,14 +27,14 @@ namespace ContactList.Controllers
             var currentUser = await _user.GetUserAsync(User);
             if(currentUser == null) return Challenge();
 
-            var temp = _contactService.GetContactsAsync(currentUser);
+            var temp = await _contactService.GetContactsAsync(currentUser);
 
             AllContactListViewModel all = new AllContactListViewModel
             {
                 contactList = temp
             };
 
-            return Json(all);
+            return View(all);
         }
 
         [Authorize]

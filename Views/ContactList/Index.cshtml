@@ -14,11 +14,18 @@
         <th>Address</th>
         <th>Website</th>
         <th>Date Of Birth</th>
-        <th>Full Name</th>
     </tr>
 
-    @foreach(FullContactViewModel var in AllContactListViewModel)
+    @foreach(Person person in Model.contactList)
     {
-        
+        <tr>
+            <td>@person.FullName</td>
+            <td>@person.NickName</td>
+            <td>
+            </td>
+            <td>@person.Address</td>
+            <td>@person.Website</td>
+            <td>@person.DateOfBirth</td>
+        </tr>
     }
 </table>
