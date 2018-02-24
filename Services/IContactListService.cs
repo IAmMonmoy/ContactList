@@ -15,5 +15,7 @@ namespace ContactList.Services
         Task<bool> DeleteContact(Guid PersonId);
 
         Task<Person> GetContactByIdAsync(Guid personId);
+
+        Task<bool> UpdateContactAsync(Person person);
     }
 }

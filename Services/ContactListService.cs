@@ -72,5 +72,10 @@ namespace ContactList.Services
                                  .Include(x => x.Phones)
                                  .SingleAsync();
         }
+
+        public async Task<bool> UpdateContactAsync(Person person)
+        {
+
+        }
     }
 }
