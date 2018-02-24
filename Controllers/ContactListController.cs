@@ -13,6 +13,7 @@ using System.Text;
 
 namespace ContactList.Controllers
 {
+    [Authorize]
     public class ContactList : Controller
     {
         private readonly IContactListService _contactService;
@@ -24,7 +25,6 @@ namespace ContactList.Controllers
             _user = user;
         }
         
-        [Authorize]
         public async Task<IActionResult> Index()
         {
             var currentUser = await _user.GetUserAsync(User);
@@ -40,13 +40,11 @@ namespace ContactList.Controllers
             return View(all);
         }
 
-        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Edit(Guid personId)
         {
@@ -55,7 +53,6 @@ namespace ContactList.Controllers
             return View(entity);
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> ContactCreate(ContactFormViewModel contactForm)
         {
@@ -79,7 +76,6 @@ namespace ContactList.Controllers
             //return View();
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> ContactDelete(Guid deleteButton)
         {
@@ -93,7 +89,6 @@ namespace ContactList.Controllers
             return RedirectToAction("Index");
         }   
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> ContactUpdate(Person person, Guid personId)
         {
@@ -107,7 +102,6 @@ namespace ContactList.Controllers
             return RedirectToAction("Index");
         }
         
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> DownloadCsv()
         {
