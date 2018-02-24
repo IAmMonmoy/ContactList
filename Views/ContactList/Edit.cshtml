@@ -32,20 +32,22 @@
                     <input value="Model.DateOfBirth" asp-for="DateOfBirth" type="date" class="form-control" placeholder="Date Of Birth">
                 </div>
 
-                @var arrayCount = 0;
-                @foreach(Phone phone in Model.Phones)
-                {
-                    var makeName = "Phones["+arrayCount+"].Phone";
-                    arrayCount = arrayCount + 1;
+                @{
+                    var arrayCount = 0;
+                    @foreach(PhoneNumber phone in Model.Phones)
+                    {
+                        var makeName = "Phones["+arrayCount+"].Phone";
+                        arrayCount = arrayCount + 1;
 
-                     <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <input value="phone.Phone" name="@makeName" type="text" class="form-control phoneNumber" placeholder="Phone Number">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <input value="phone.Phone" name="@makeName" type="text" class="form-control phoneNumber" placeholder="Phone Number">
+                                </div>
+                                <div class="col-md-2"><i id="addPhone" class="fa fa-plus-circle"></i></div>
                             </div>
-                            <div class="col-md-2"><i id="addPhone" class="fa fa-plus-circle"></i></div>
                         </div>
-                    </div>
+                    }
                 }
                
             </div>
