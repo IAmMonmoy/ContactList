@@ -7,7 +7,7 @@
 ## Run
     -Clone the repository.
     -Open terminal in the repository.
-    -type ** _dotnet-run_ **.
+    -type dotnet-run.
     
 ## Description
     -Every authenticated user can create contact list.
