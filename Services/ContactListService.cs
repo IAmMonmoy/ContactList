@@ -73,7 +73,7 @@ namespace ContactList.Services
                                  .SingleAsync();
         }
 
-        public async Task<bool> UpdateContactAsync(Person person)
+        public async Task<bool> UpdateContactAsync(Person person, Guid id)
         {
 
         }

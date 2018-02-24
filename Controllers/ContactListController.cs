@@ -96,7 +96,8 @@ namespace ContactList.Controllers
         [HttpPost]
         public async Task<IActionResult> ContactUpdate(Person person, Guid personId)
         {
-            return View();
+             var currentUser = await _user.GetUserAsync(User);
+            return Json(personId);
         }   
     }
 }
