@@ -28,7 +28,7 @@ namespace ContactList.Models
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
-        public IEnumerable<PhoneNumber> Phones { get; set; }
+        public List<PhoneNumber> Phones { get; set; }
 
     }
 }

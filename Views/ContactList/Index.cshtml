@@ -22,6 +22,10 @@
             <td>@person.FullName</td>
             <td>@person.NickName</td>
             <td>
+                @foreach (var phone in person.Phones)
+                {
+                    <p>@phone.Phone</p>
+                }
             </td>
             <td>@person.Address</td>
             <td>@person.Website</td>
