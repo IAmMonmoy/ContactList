@@ -12,7 +12,9 @@
    
    Open terminal in the repository.
    
-   type **dotnet-run**.
+   type **dotnet ef database update** in the terminal.
+   
+   type **dotnet run**.
    
    
 ## Description
